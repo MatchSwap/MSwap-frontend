@@ -7,12 +7,20 @@ import { NavLink, Link as HistoryLink } from 'react-router-dom'
 import { ArrowLeft } from 'react-feather'
 import { RowBetween } from '../Row'
 import QuestionHelper from '../QuestionHelper'
+import Settings from '../Settings'
 
 const Tabs = styled.div`
+  max-width: 420px;
+  width: 100%;
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   border-radius: 3rem;
-  justify-content: space-evenly;
+  justify-content: space-between;
+`
+const TabsItem = styled.div`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: center;
+  border-radius: 3rem;
 `
 
 const activeClassName = 'ACTIVE'
@@ -23,6 +31,8 @@ const StyledNavLink = styled(NavLink).attrs({
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   justify-content: center;
+  padding: 0 1rem;
+  margin-right: 32px;
   height: 3rem;
   border-radius: 3rem;
   outline: none;
@@ -32,9 +42,10 @@ const StyledNavLink = styled(NavLink).attrs({
   font-size: 20px;
 
   &.${activeClassName} {
-    border-radius: 12px;
+    /* border-radius: 12px; */
     font-weight: 500;
     color: ${({ theme }) => theme.text1};
+    background-color: ${({ theme }) => theme.bg7};
   }
 
   :hover,
@@ -56,12 +67,15 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
   const { t } = useTranslation()
   return (
     <Tabs style={{ marginBottom: '20px' }}>
-      <StyledNavLink id={`swap-nav-link`} to={'/swap'} isActive={() => active === 'swap'}>
-        {t('swap')}
-      </StyledNavLink>
-      <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
-        {t('pool')}
-      </StyledNavLink>
+      <TabsItem>
+        <StyledNavLink id={`swap-nav-link`} to={'/swap'} isActive={() => active === 'swap'}>
+          {t('swap')}
+        </StyledNavLink>
+        <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
+          {t('pool')}
+        </StyledNavLink>
+      </TabsItem>
+      <Settings />
     </Tabs>
   )
 }

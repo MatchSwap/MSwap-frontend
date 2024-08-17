@@ -94,9 +94,9 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
 //   '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D' // v2 router 02
 // ]
 const BAD_RECIPIENT_ADDRESSES: string[] = [
-  '0xEDB432d6437d3069cB56a9CE6d019D903b861c39', // v2 factory
-  '0xC7F00Ae3c433D87D982c8C51397a5B1E138bb0c0', // v2 router 01
-  '0xC7F00Ae3c433D87D982c8C51397a5B1E138bb0c0' // v2 router 02
+  '0x338bCC4efd3cA000D123d7352b362Fc6D5B3D829', // v2 factory
+  '0x83700f69B0173ebB46fDAd89A4b27eB7ef171118', // v2 router 01
+  '0x83700f69B0173ebB46fDAd89A4b27eB7ef171118' // v2 router 02
 ]
 
 /**
@@ -147,8 +147,6 @@ export function useDerivedSwapInfo(): {
 
   const bestTradeExactIn = useTradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
   const bestTradeExactOut = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
-  console.log('bestTradeExactIn -------', bestTradeExactIn)
-  console.log('bestTradeExactOut -------', bestTradeExactOut)
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
 
   const currencyBalances = {

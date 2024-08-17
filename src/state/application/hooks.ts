@@ -1,6 +1,14 @@
 import { useCallback, useMemo } from 'react'
 import { useActiveWeb3React } from '../../hooks'
-import { addPopup, PopupContent, removePopup, toggleWalletModal, toggleSettingsMenu } from './actions'
+import {
+  addPopup,
+  PopupContent,
+  removePopup,
+  toggleWalletModal,
+  toggleSettingsMenu,
+  toggleLanguageModal,
+  toggleNetModal
+} from './actions'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../index'
 
@@ -17,6 +25,24 @@ export function useWalletModalOpen(): boolean {
 export function useWalletModalToggle(): () => void {
   const dispatch = useDispatch()
   return useCallback(() => dispatch(toggleWalletModal()), [dispatch])
+}
+
+export function useLanguageModalOpen(): boolean {
+  return useSelector((state: AppState) => state.application.languageModalOpen)
+}
+
+export function useNetModalToggle(): () => void {
+  const dispatch = useDispatch()
+  return useCallback(() => dispatch(toggleNetModal()), [dispatch])
+}
+
+export function useNetModalOpen(): boolean {
+  return useSelector((state: AppState) => state.application.netModalOpen)
+}
+
+export function useLanguageModalToggle(): () => void {
+  const dispatch = useDispatch()
+  return useCallback(() => dispatch(toggleLanguageModal()), [dispatch])
 }
 
 export function useSettingsMenuOpen(): boolean {

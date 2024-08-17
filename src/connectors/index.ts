@@ -31,6 +31,11 @@ export const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42, 698, 9001]
 })
 
+// export const okxInjected = new InjectedConnector({
+//   supportedChainIds: [698, 9001]
+// })
+export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
+
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
   // rpc: { 1: NETWORK_URL },
@@ -39,7 +44,7 @@ export const walletconnect = new WalletConnectConnector({
   // pollingInterval: 15000
   rpc: {
     // 9001: 'https://rpc.matchscan.io/'
-    698: 'http://35.78.192.225:8545/'
+    698: ' https://rpc.matchain.io/'
   },
   bridge: WALLETCONNECT_BRIDGE_URL,
   qrcode: true,
@@ -61,7 +66,7 @@ export const portis = new PortisConnector({
 // mainnet only
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URL,
-  appName: 'Uniswap',
+  appName: 'MSwap',
   appLogoUrl:
     'https://mpng.pngfly.com/20181202/bex/kisspng-emoji-domain-unicorn-pin-badges-sticker-unicorn-tumblr-emoji-unicorn-iphoneemoji-5c046729264a77.5671679315437924251569.jpg'
 })

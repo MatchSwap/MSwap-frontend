@@ -5,21 +5,28 @@ import { Text } from 'rebass'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
-import Wordmark from '../../assets/svg/wordmark.svg'
-import WordmarkDark from '../../assets/svg/wordmark_white.svg'
+import Logo from '../../assets/images/LOGO.png'
+import LogoDark from '../../assets/images/LOGO_white.png'
+import IconLang from '../../assets/images/icon_lang.png'
+import IconLangDark from '../../assets/images/icon_lang_white.png'
+// import IconNet from '../../assets/images/icon_net.png'
+// import IconNetDark from '../../assets/images/icon_net_white.png'
+// import Wordmark from '../../assets/svg/wordmark.svg'
+// import WordmarkDark from '../../assets/svg/wordmark_white.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
 
 import { YellowCard } from '../Card'
-import Settings from '../Settings'
-import Menu from '../Menu'
+// import Settings from '../Settings'
+// import Menu from '../Menu'
 
-import Row, { RowBetween } from '../Row'
+import { RowBetween } from '../Row' //Row,
 import Web3Status from '../Web3Status'
-import VersionSwitch from './VersionSwitch'
+import { useLanguageModalToggle } from '../../state/application/hooks'
+import LanguageModal from '../LanguageModal'
+import NetModal from '../NetModal'
+// import VersionSwitch from './VersionSwitch'
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -42,14 +49,14 @@ const HeaderElement = styled.div`
   align-items: center;
 `
 
-const HeaderElementWrap = styled.div`
-  display: flex;
-  align-items: center;
+// const HeaderElementWrap = styled.div`
+//   display: flex;
+//   align-items: center;
 
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    margin-top: 0.5rem;
-`};
-`
+//   ${({ theme }) => theme.mediaWidth.upToSmall`
+//     margin-top: 0.5rem;
+// `};
+// `
 
 const Title = styled.a`
   display: flex;
@@ -61,20 +68,19 @@ const Title = styled.a`
   }
 `
 
-const TitleText = styled(Row)`
-  width: fit-content;
-  white-space: nowrap;
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
-`
+// const TitleText = styled(Row)`
+//   width: fit-content;
+//   white-space: nowrap;
+//   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+//     display: none;
+//   `};
+// `
 
 const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg3)};
-  border-radius: 12px;
+  background-color: transparent;
   white-space: nowrap;
   width: 100%;
 
@@ -104,7 +110,19 @@ const UniIcon = styled.div`
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
     img { 
-      width: 4.5rem;
+      width: 6rem;
+    }
+  `};
+`
+const SmallIcon = styled.div`
+  transition: transform 0.3s ease;
+  margin-right: 12px;
+  :hover {
+    transform: rotate(-5deg);
+  }
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    img { 
+      width: 2rem;
     }
   `};
 `
@@ -138,21 +156,22 @@ const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
-
+  const toggleLanguageModal = useLanguageModalToggle()
+  // const toggleNetModal = useNetModalToggle()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [isDark] = useDarkModeManager()
 
   return (
     <HeaderFrame>
-      <RowBetween style={{ alignItems: 'flex-start' }} padding="1rem 1rem 0 1rem">
+      <RowBetween style={{ alignItems: 'center' }} padding="1rem 1rem 0 1rem">
         <HeaderElement>
           <Title href=".">
             <UniIcon>
               <img src={isDark ? LogoDark : Logo} alt="logo" />
             </UniIcon>
-            <TitleText>
+            {/* <TitleText>
               <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
-            </TitleText>
+            </TitleText> */}
           </Title>
         </HeaderElement>
         <HeaderControls>
@@ -166,14 +185,22 @@ export default function Header() {
                   {userEthBalance?.toSignificant(4)} MAT
                 </BalanceText>
               ) : null}
+              <SmallIcon onClick={toggleLanguageModal}>
+                <img src={isDark ? IconLangDark : IconLang} alt="logo" />
+              </SmallIcon>
+              {/* <SmallIcon onClick={toggleNetModal}>
+                <img src={isDark ? IconNetDark : IconNet} alt="logo" />
+              </SmallIcon> */}
+              <LanguageModal />
+              <NetModal />
               <Web3Status />
             </AccountElement>
           </HeaderElement>
-          <HeaderElementWrap>
+          {/* <HeaderElementWrap>
             <VersionSwitch />
             <Settings />
             <Menu />
-          </HeaderElementWrap>
+          </HeaderElementWrap> */}
         </HeaderControls>
       </RowBetween>
     </HeaderFrame>

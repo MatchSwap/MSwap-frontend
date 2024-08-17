@@ -61,6 +61,7 @@ const Web3StatusError = styled(Web3StatusGeneric)`
 const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
   background-color: ${({ theme }) => theme.primary4};
   border: none;
+  border-radius: 30px;
   color: ${({ theme }) => theme.primaryText1};
   font-weight: 500;
 
@@ -205,7 +206,7 @@ function Web3StatusInner() {
   } else {
     return (
       <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account}>
-        <Text>{t('Connect to a wallet')}</Text>
+        <Text>{t('Connect Wallet')}</Text>
       </Web3StatusConnect>
     )
   }

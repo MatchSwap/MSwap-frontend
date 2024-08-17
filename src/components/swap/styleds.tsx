@@ -8,6 +8,13 @@ import { AutoColumn } from '../Column'
 export const Wrapper = styled.div`
   position: relative;
 `
+export const SwitchIcon = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+`
 
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
   padding: 2px;
