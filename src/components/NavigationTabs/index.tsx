@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink, Link as HistoryLink } from 'react-router-dom'
 
 import { ArrowLeft } from 'react-feather'
-import { RowBetween } from '../Row'
+import Row, { RowBetween } from '../Row'
 import QuestionHelper from '../QuestionHelper'
 import Settings from '../Settings'
 
@@ -55,6 +55,7 @@ const StyledNavLink = styled(NavLink).attrs({
 `
 
 const ActiveText = styled.div`
+  margin-left: 1rem;
   font-weight: 500;
   font-size: 20px;
 `
@@ -98,10 +99,13 @@ export function AddRemoveTabs({ adding }: { adding: boolean }) {
   return (
     <Tabs>
       <RowBetween style={{ padding: '1rem' }}>
-        <HistoryLink to="/pool">
-          <StyledArrowLeft />
-        </HistoryLink>
-        <ActiveText>{adding ? 'Add' : 'Remove'} Liquidity</ActiveText>
+        <Row>
+          <HistoryLink to="/pool">
+            <StyledArrowLeft />
+          </HistoryLink>
+          <ActiveText>{adding ? 'Add' : 'Remove'} Liquidity</ActiveText>
+        </Row>
+        {/* <Settings /> */}
         <QuestionHelper
           text={
             adding
@@ -109,6 +113,28 @@ export function AddRemoveTabs({ adding }: { adding: boolean }) {
               : 'Removing pool tokens converts your position back into underlying tokens at the current rate, proportional to your share of the pool. Accrued fees are included in the amounts you receive.'
           }
         />
+      </RowBetween>
+    </Tabs>
+  )
+}
+export function NewPositionsTabs() {
+  return (
+    <Tabs>
+      <RowBetween style={{ padding: '1rem' }}>
+        <Row>
+          <HistoryLink to="/pool">
+            <StyledArrowLeft />
+          </HistoryLink>
+          <ActiveText>New Position</ActiveText>
+        </Row>
+        <Settings />
+        {/* <QuestionHelper
+          text={
+            adding
+              ? 'When you add liquidity, you are given pool tokens representing your position. These tokens automatically earn fees proportional to your share of the pool, and can be redeemed at any time.'
+              : 'Removing pool tokens converts your position back into underlying tokens at the current rate, proportional to your share of the pool. Accrued fees are included in the amounts you receive.'
+          }
+        /> */}
       </RowBetween>
     </Tabs>
   )

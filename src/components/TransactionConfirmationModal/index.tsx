@@ -4,15 +4,17 @@ import styled, { ThemeContext } from 'styled-components'
 import Modal from '../Modal'
 import { ExternalLink } from '../../theme'
 import { Text } from 'rebass'
-import { CloseIcon, Spinner } from '../../theme/components'
+import { CloseIcon } from '../../theme/components' //Spinner
 import { RowBetween } from '../Row'
-import { AlertTriangle, ArrowUpCircle } from 'react-feather'
+import { AlertTriangle } from 'react-feather' //ArrowUpCircle
 import { ButtonPrimary } from '../Button'
 import { AutoColumn, ColumnCenter } from '../Column'
-import Circle from '../../assets/images/blue-loader.svg'
+// import Circle from '../../assets/images/blue-loader.svg'
+import IconArrowUp from '../../assets/images/icon_ArrowUp.svg'
 
 import { getEtherscanLink } from '../../utils'
 import { useActiveWeb3React } from '../../hooks'
+import Loader from '../Loader'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,9 +33,18 @@ const ConfirmedIcon = styled(ColumnCenter)`
   padding: 60px 0;
 `
 
-const CustomLightSpinner = styled(Spinner)<{ size: string }>`
-  height: ${({ size }) => size};
-  width: ${({ size }) => size};
+// const CustomLightSpinner = styled(Spinner)<{ size: string }>`
+//   height: ${({ size }) => size};
+//   width: ${({ size }) => size};
+// `
+const IconWrapper = styled.div<{ size?: number }>`
+  ${({ theme }) => theme.flexColumnNoWrap};
+  align-items: center;
+  justify-content: center;
+  & > * {
+    height: ${({ size }) => (size ? size + 'px' : '90px')};
+    width: ${({ size }) => (size ? size + 'px' : '90px')};
+  }
 `
 
 function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () => void; pendingText: string }) {
@@ -45,7 +56,8 @@ function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () 
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
         <ConfirmedIcon>
-          <CustomLightSpinner src={Circle} alt="loader" size={'90px'} />
+          {/* <CustomLightSpinner src={Circle} alt="loader" size={'90px'} /> */}
+          <Loader size={'90px'} />
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify={'center'}>
           <Text fontWeight={500} fontSize={20}>
@@ -84,25 +96,27 @@ function TransactionSubmittedContent({
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
         <ConfirmedIcon>
-          <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.primary1} />
+          {/* <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.primary1} /> */}
+          <IconWrapper>
+            <img src={IconArrowUp} alt="" />
+          </IconWrapper>
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify={'center'}>
           <Text fontWeight={500} fontSize={20}>
             Transaction Submitted
           </Text>
-
-          {chainId && hash && (
-            <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
-              <Text fontWeight={500} fontSize={14} color={theme.primary1}>
-                View on Etherscan
-              </Text>
-            </ExternalLink>
-          )}
-          <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 0 0' }}>
+          <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 20px 0' }}>
             <Text fontWeight={500} fontSize={20}>
               Close
             </Text>
           </ButtonPrimary>
+          {chainId && hash && (
+            <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
+              <Text fontWeight={500} fontSize={14} color={theme.text3}>
+                View in browser
+              </Text>
+            </ExternalLink>
+          )}
         </AutoColumn>
       </Section>
     </Wrapper>

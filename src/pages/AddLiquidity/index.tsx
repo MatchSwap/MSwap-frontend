@@ -6,14 +6,14 @@ import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
-import { BlueCard, GreyCard, LightCard } from '../../components/Card'
+import { LightCardNoPadding, WriteCardStyled } from '../../components/Card' //GreyCard,
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
-import { AddRemoveTabs } from '../../components/NavigationTabs'
+import { NewPositionsTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import Row, { RowBetween, RowFlat } from '../../components/Row'
 
@@ -36,7 +36,20 @@ import AppBody from '../AppBody'
 import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
-import { PoolPriceBar } from './PoolPriceBar'
+// import { PoolPriceBar } from './PoolPriceBar'
+
+import IconTop from '../../assets/images/icon_tip.svg'
+
+const IconWrapper = styled.div<{ size?: number }>`
+  ${({ theme }) => theme.flexColumnNoWrap};
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.25rem;
+  & > * {
+    height: ${({ size }) => (size ? size + 'px' : '15px')};
+    width: ${({ size }) => (size ? size + 'px' : '15px')};
+  }
+`
 
 export default function AddLiquidity({
   match: {
@@ -219,30 +232,30 @@ export default function AddLiquidity({
   const modalHeader = () => {
     return noLiquidity ? (
       <AutoColumn gap="20px">
-        <LightCard mt="20px" borderRadius="20px">
+        <LightCardNoPadding mt="20px" borderRadius="20px">
           <RowFlat>
-            <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
-              {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}
-            </Text>
             <DoubleCurrencyLogo
               currency0={currencies[Field.CURRENCY_A]}
               currency1={currencies[Field.CURRENCY_B]}
               size={30}
             />
+            <Text fontSize="32px" fontWeight={500} lineHeight="32px" marginLeft={10}>
+              {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}
+            </Text>
           </RowFlat>
-        </LightCard>
+        </LightCardNoPadding>
       </AutoColumn>
     ) : (
       <AutoColumn gap="20px">
         <RowFlat style={{ marginTop: '20px' }}>
-          <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
-            {liquidityMinted?.toSignificant(6)}
-          </Text>
           <DoubleCurrencyLogo
             currency0={currencies[Field.CURRENCY_A]}
             currency1={currencies[Field.CURRENCY_B]}
             size={30}
           />
+          <Text fontSize="32px" fontWeight={500} lineHeight="32px" marginRight={10}>
+            {liquidityMinted?.toSignificant(6)}
+          </Text>
         </RowFlat>
         <Row>
           <Text fontSize="24px">
@@ -313,7 +326,7 @@ export default function AddLiquidity({
   return (
     <>
       <AppBody>
-        <AddRemoveTabs adding={true} />
+        <NewPositionsTabs />
         <Wrapper>
           <TransactionConfirmationModal
             isOpen={showConfirm}
@@ -333,8 +346,8 @@ export default function AddLiquidity({
           <AutoColumn gap="20px">
             {noLiquidity && (
               <ColumnCenter>
-                <BlueCard>
-                  <AutoColumn gap="10px">
+                <WriteCardStyled>
+                  {/* <AutoColumn gap="10px">
                     <TYPE.link fontWeight={600} color={'primaryText1'}>
                       You are the first liquidity provider.
                     </TYPE.link>
@@ -344,8 +357,23 @@ export default function AddLiquidity({
                     <TYPE.link fontWeight={400} color={'primaryText1'}>
                       Once you are happy with the rate click supply to review.
                     </TYPE.link>
+                  </AutoColumn> */}
+                  <AutoColumn gap="10px">
+                    <Row>
+                      <IconWrapper>
+                        <img src={IconTop} alt=""></img>
+                      </IconWrapper>
+                      <TYPE.link fontSize={10} fontWeight={600} color={'primary6'}>
+                        Tip
+                      </TYPE.link>
+                    </Row>
+                    <TYPE.link fontSize={10} fontWeight={400} color={'primary6'}>
+                      {
+                        'When you add liquidity, you will receive pool tokens representing your position. These tokens automatically earn fees proportional to your share of the pool, and can be redeemed at any time.'
+                      }
+                    </TYPE.link>
                   </AutoColumn>
-                </BlueCard>
+                </WriteCardStyled>
               </ColumnCenter>
             )}
             <CurrencyInputPanel
@@ -375,7 +403,7 @@ export default function AddLiquidity({
               id="add-liquidity-input-tokenb"
               showCommonBases
             />
-            {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+            {/* {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
               <>
                 <GreyCard padding="0px" borderRadius={'20px'}>
                   <RowBetween padding="1rem">
@@ -393,7 +421,7 @@ export default function AddLiquidity({
                   </LightCard>
                 </GreyCard>
               </>
-            )}
+            )} */}
 
             {!account ? (
               <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>

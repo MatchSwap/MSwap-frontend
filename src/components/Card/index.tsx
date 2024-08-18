@@ -18,6 +18,12 @@ export const LightCard = styled(Card)`
   background-color: ${({ theme }) => theme.bg1};
 `
 
+export const LightCardNoPadding = styled(Card)`
+  padding: 0;
+  border: 1px solid ${({ theme }) => theme.bg2};
+  background-color: ${({ theme }) => theme.bg1};
+`
+
 export const GreyCard = styled(Card)`
   background-color: ${({ theme }) => theme.bg3};
 `
@@ -36,6 +42,12 @@ export const PinkCard = styled(Card)`
   background-color: rgba(255, 0, 122, 0.03);
   color: ${({ theme }) => theme.primary1};
   font-weight: 500;
+`
+export const WriteCardStyled = styled(Card)`
+  background-color: ${({ theme }) => theme.bg8};
+  color: ${({ theme }) => theme.primary4};
+  border-radius: 12px;
+  width: fit-content;
 `
 
 const BlueCardStyled = styled(Card)`

@@ -54,13 +54,14 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH], GLD, TOX, TOXA, TOXB]
+  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], GLD, TOX, TOXA, TOXB]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], GLD, TOX, TOXA, TOXB]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
