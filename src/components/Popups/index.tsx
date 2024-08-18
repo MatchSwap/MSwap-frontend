@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useActivePopups } from '../../state/application/hooks'
+import { useActivePopups, useRemovePopup } from '../../state/application/hooks'
 import { AutoColumn } from '../Column'
 import PopupItem from './PopupItem'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../state'
+import ReactGA from 'react-ga'
+import { acceptListUpdate } from '../../state/lists/actions'
 
 const MobilePopupWrapper = styled.div<{ height: string | number }>`
   position: relative;
@@ -45,6 +49,21 @@ const FixedPopupColumn = styled(AutoColumn)`
 export default function Popups() {
   // get all popups
   const activePopups = useActivePopups()
+  console.log('activePopups ----- ', activePopups)
+  const removePopup = useRemovePopup()
+  const dispatch = useDispatch<AppDispatch>()
+  useEffect(() => {
+    if (activePopups[0]) {
+      const data: any = activePopups[0].content
+      ReactGA.event({
+        category: 'Lists',
+        action: 'Update List from Popup',
+        label: data.listUpdate?.listUrl
+      })
+      dispatch(acceptListUpdate(data.listUpdate?.listUrl))
+      removePopup(activePopups[0].key)
+    }
+  }, [activePopups])
 
   return (
     <>

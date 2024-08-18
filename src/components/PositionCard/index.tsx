@@ -1,7 +1,7 @@
 import { JSBI, Pair, Percent } from '@uniswap/sdk'
 import { darken } from 'polished'
 import React, { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'react-feather'
+import { ChevronRight } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
 import styled from 'styled-components'
@@ -9,23 +9,29 @@ import { useTotalSupply } from '../../data/TotalSupply'
 
 import { useActiveWeb3React } from '../../hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
-import { ExternalLink } from '../../theme'
+// import { ExternalLink } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { ButtonSecondary } from '../Button'
+import { ButtonLight, ButtonPrimary } from '../Button'
 
 import Card, { GreyCard } from '../Card'
 import { AutoColumn } from '../Column'
 import CurrencyLogo from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
-import { AutoRow, RowBetween, RowFixed } from '../Row'
+import { RowBetween, RowFixed } from '../Row'
 import { Dots } from '../swap/styleds'
+import PositionModal from '../PositionModal'
+import { CloseIcon } from '../../theme/components'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
 `
-
+export const FixedHeaderHeightRow = styled(FixedHeightRow)`
+  margin-bottom: 24px;
+`
 export const HoverCard = styled(Card)`
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.bg8};
   border: 1px solid ${({ theme }) => theme.bg2};
   :hover {
     border: 1px solid ${({ theme }) => darken(0.06, theme.bg2)};
@@ -162,83 +168,100 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             </Text>
           </RowFixed>
           <RowFixed>
-            {showMore ? (
-              <ChevronUp size="20" style={{ marginLeft: '10px' }} />
-            ) : (
-              <ChevronDown size="20" style={{ marginLeft: '10px' }} />
-            )}
+            <Text color="#888D9B" fontSize={16} fontWeight={500} marginLeft={'6px'}>
+              manage
+            </Text>
+            <ChevronRight size="20" style={{ marginLeft: '10px' }} />
           </RowFixed>
         </FixedHeightRow>
-        {showMore && (
-          <AutoColumn gap="8px">
-            <FixedHeightRow>
-              <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency0.symbol}:
-                </Text>
-              </RowFixed>
-              {token0Deposited ? (
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token0Deposited?.toSignificant(6)}
-                  </Text>
-                  <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency0} />
-                </RowFixed>
-              ) : (
-                '-'
-              )}
-            </FixedHeightRow>
-
-            <FixedHeightRow>
-              <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency1.symbol}:
-                </Text>
-              </RowFixed>
-              {token1Deposited ? (
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token1Deposited?.toSignificant(6)}
-                  </Text>
-                  <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency1} />
-                </RowFixed>
-              ) : (
-                '-'
-              )}
-            </FixedHeightRow>
-            <FixedHeightRow>
-              <Text fontSize={16} fontWeight={500}>
-                Your pool tokens:
-              </Text>
-              <Text fontSize={16} fontWeight={500}>
-                {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
-              </Text>
-            </FixedHeightRow>
-            <FixedHeightRow>
-              <Text fontSize={16} fontWeight={500}>
-                Your pool share:
-              </Text>
-              <Text fontSize={16} fontWeight={500}>
-                {poolTokenPercentage ? poolTokenPercentage.toFixed(2) + '%' : '-'}
-              </Text>
-            </FixedHeightRow>
-
-            <AutoRow justify="center" marginTop={'10px'}>
-              <ExternalLink href={`https://uniswap.info/pair/${pair.liquidityToken.address}`}>
-                View pool information ↗
-              </ExternalLink>
-            </AutoRow>
-            <RowBetween marginTop="10px">
-              <ButtonSecondary as={Link} to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} width="48%">
-                Add
-              </ButtonSecondary>
-              <ButtonSecondary as={Link} width="48%" to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                Remove
-              </ButtonSecondary>
-            </RowBetween>
-          </AutoColumn>
-        )}
       </AutoColumn>
+      <PositionModal
+        isOpen={showMore}
+        onDismiss={() => setShowMore(!showMore)}
+        content={() => (
+          <HoverCard border={border}>
+            <AutoColumn gap="12px">
+              <FixedHeaderHeightRow>
+                <RowFixed>
+                  <DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin={true} size={20} />
+                  <Text fontWeight={500} fontSize={20}>
+                    {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+                  </Text>
+                </RowFixed>
+                <RowFixed>
+                  <CloseIcon onClick={() => setShowMore(!showMore)} />
+                </RowFixed>
+              </FixedHeaderHeightRow>
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  Your pool tokens:
+                </Text>
+                <Text fontSize={16} fontWeight={500}>
+                  {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
+                </Text>
+              </FixedHeightRow>
+              <FixedHeightRow>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    Pooled {currency0.symbol}:
+                  </Text>
+                </RowFixed>
+                {token0Deposited ? (
+                  <RowFixed>
+                    <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency0} />
+                    <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                      {token0Deposited?.toSignificant(6)}
+                    </Text>
+                  </RowFixed>
+                ) : (
+                  '-'
+                )}
+              </FixedHeightRow>
+
+              <FixedHeightRow>
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500}>
+                    Pooled {currency1.symbol}:
+                  </Text>
+                </RowFixed>
+                {token1Deposited ? (
+                  <RowFixed>
+                    <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency1} />
+                    <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                      {token1Deposited?.toSignificant(6)}
+                    </Text>
+                  </RowFixed>
+                ) : (
+                  '-'
+                )}
+              </FixedHeightRow>
+
+              <FixedHeightRow>
+                <Text fontSize={16} fontWeight={500}>
+                  Your pool share:
+                </Text>
+                <Text fontSize={16} fontWeight={500}>
+                  {poolTokenPercentage ? poolTokenPercentage.toFixed(2) + '%' : '-'}
+                </Text>
+              </FixedHeightRow>
+
+              {/* <AutoRow justify="center" marginTop={'10px'}>
+                  <ExternalLink href={`https://uniswap.info/pair/${pair.liquidityToken.address}`}>
+                    View pool information ↗
+                  </ExternalLink>
+                </AutoRow> */}
+              <RowBetween marginTop="10px">
+                <ButtonPrimary as={Link} to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} width="48%">
+                  Add
+                </ButtonPrimary>
+                <ButtonLight as={Link} width="48%" to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}>
+                  Remove
+                </ButtonLight>
+              </RowBetween>
+            </AutoColumn>
+          </HoverCard>
+        )}
+      />
     </HoverCard>
   )
 }

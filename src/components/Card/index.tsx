@@ -25,7 +25,7 @@ export const LightCardNoPadding = styled(Card)`
 `
 
 export const GreyCard = styled(Card)`
-  background-color: ${({ theme }) => theme.bg3};
+  background-color: ${({ theme }) => theme.bg7};
 `
 
 export const OutlineCard = styled(Card)`
@@ -48,6 +48,10 @@ export const WriteCardStyled = styled(Card)`
   color: ${({ theme }) => theme.primary4};
   border-radius: 12px;
   width: fit-content;
+`
+export const WriteBgCardStyled = styled(Card)`
+  background-color: ${({ theme }) => theme.bg8};
+  border-radius: 12px;
 `
 
 const BlueCardStyled = styled(Card)`

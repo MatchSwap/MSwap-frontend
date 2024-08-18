@@ -33,7 +33,7 @@ const FancyButton = styled.button`
     border: 1px solid ${({ theme }) => theme.bg4};
   }
   :focus {
-    border: 1px solid ${({ theme }) => theme.primary1};
+    border: 1px solid ${({ theme }) => theme.bg3};
   }
 `
 
@@ -42,8 +42,8 @@ const Option = styled(FancyButton)<{ active: boolean }>`
   :hover {
     cursor: pointer;
   }
-  background-color: ${({ active, theme }) => active && theme.primary1};
-  color: ${({ active, theme }) => (active ? theme.white : theme.text1)};
+  background-color: ${({ active, theme }) => active && theme.primary5};
+  color: ${({ active, theme }) => (active ? theme.text1 : theme.text1)};
 `
 
 const Input = styled.input`

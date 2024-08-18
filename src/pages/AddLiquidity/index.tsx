@@ -363,11 +363,11 @@ export default function AddLiquidity({
                       <IconWrapper>
                         <img src={IconTop} alt=""></img>
                       </IconWrapper>
-                      <TYPE.link fontSize={10} fontWeight={600} color={'primary6'}>
+                      <TYPE.link fontSize={12} fontWeight={600} color={'primary6'}>
                         Tip
                       </TYPE.link>
                     </Row>
-                    <TYPE.link fontSize={10} fontWeight={400} color={'primary6'}>
+                    <TYPE.link fontSize={12} fontWeight={400} color={'primary6'}>
                       {
                         'When you add liquidity, you will receive pool tokens representing your position. These tokens automatically earn fees proportional to your share of the pool, and can be redeemed at any time.'
                       }
@@ -479,7 +479,7 @@ export default function AddLiquidity({
       </AppBody>
 
       {pair && !noLiquidity && pairState !== PairState.INVALID ? (
-        <AutoColumn style={{ minWidth: '20rem', marginTop: '1rem' }}>
+        <AutoColumn style={{ width: '100%', marginTop: '1rem' }}>
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
       ) : null}
