@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useActivePopups, useRemovePopup } from '../../state/application/hooks'
+import { useActivePopups } from '../../state/application/hooks'
 import { AutoColumn } from '../Column'
 import PopupItem from './PopupItem'
 import { useDispatch } from 'react-redux'
@@ -50,7 +50,7 @@ export default function Popups() {
   // get all popups
   const activePopups = useActivePopups()
   console.log('activePopups ----- ', activePopups)
-  const removePopup = useRemovePopup()
+  // const removePopup = useRemovePopup()
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
     if (activePopups[0]) {
@@ -61,9 +61,9 @@ export default function Popups() {
         label: data.listUpdate?.listUrl
       })
       dispatch(acceptListUpdate(data.listUpdate?.listUrl))
-      removePopup(activePopups[0].key)
+      // removePopup(activePopups[0].key)
     }
-  }, [activePopups])
+  }, [])
 
   return (
     <>
