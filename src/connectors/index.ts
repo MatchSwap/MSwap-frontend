@@ -31,10 +31,10 @@ export const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42, 698]
 })
 
-// export const okxInjected = new InjectedConnector({
-//   supportedChainIds: [698]
-// })
-export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
+export const okxInjected = new InjectedConnector({
+  supportedChainIds: [698]
+})
+// export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
