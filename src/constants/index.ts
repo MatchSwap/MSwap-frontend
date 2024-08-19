@@ -9,15 +9,16 @@ export const ROUTER_ADDRESS = '0xC7F00Ae3c433D87D982c8C51397a5B1E138bb0c0'
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
-export const WMAT = new Token(ChainId.MATCH_TEST, '0xF3d91876bF7bEBd64926D7A727A08202ECA4d280', 18, 'WMAT', 'WMAT')
-export const GLD = new Token(ChainId.MATCH_TEST, '0x05171e5C88b43ef35D223f64E1304D3D5210701D', 18, 'GLD', 'GLD')
-export const TOX = new Token(ChainId.MATCH_TEST, '0x3eE243ff68074502b1D9D65443fa97b99f634570', 18, 'TOX', 'TOX')
-export const TOXA = new Token(ChainId.MATCH_TEST, '0x65FCEc1a5A5E803877C788b494d9adF2a955e95d', 18, 'TOXA', 'TOXA')
-export const TOXB = new Token(ChainId.MATCH_TEST, '0xc787ac4A98B974cdB3d4a2D5E1ca31802f9063EA', 18, 'TOXB', 'TOXB')
+export const WBNB = new Token(ChainId.MATCH, '0x4200000000000000000000000000000000000006', 18, 'WBNB', 'Wrapped BNB')
+export const USDT = new Token(ChainId.MATCH, '0xefd4bC9afD210517803f293ABABd701CaeeCdfd0', 18, 'USDT', 'USDT')
+// export const GLD = new Token(ChainId.MATCH, '0x05171e5C88b43ef35D223f64E1304D3D5210701D', 18, 'GLD', 'GLD')
+// export const TOX = new Token(ChainId.MATCH, '0x3eE243ff68074502b1D9D65443fa97b99f634570', 18, 'TOX', 'TOX')
+// export const TOXA = new Token(ChainId.MATCH, '0x65FCEc1a5A5E803877C788b494d9adF2a955e95d', 18, 'TOXA', 'TOXA')
+// export const TOXB = new Token(ChainId.MATCH, '0xc787ac4A98B974cdB3d4a2D5E1ca31802f9063EA', 18, 'TOXB', 'TOXB')
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
-export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
+// export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
 export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound')
 export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker')
 export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth')
@@ -28,16 +29,14 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
-  [ChainId.MATCH]: [WETH[ChainId.MATCH]],
-  [ChainId.MATCH_TEST]: [WETH[ChainId.MATCH_TEST]]
+  [ChainId.MATCH]: [WETH[ChainId.MATCH]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR],
-  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH]],
-  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], WMAT, GLD, TOX, TOXA, TOXB]
+  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH], WBNB, USDT]
 }
 
 /**
@@ -54,7 +53,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH], GLD, TOX, TOXA, TOXB]
+  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH]]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

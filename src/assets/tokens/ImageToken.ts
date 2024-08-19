@@ -5,8 +5,8 @@ import TOXB from './TOXB.png'
 import GLD from './GLD.png'
 
 const ImageToken: any = {
-  MAT: MAT,
-  WMAT: MAT,
+  BNB: MAT,
+  WBNB: MAT,
   TOX,
   TOXA,
   TOXB,

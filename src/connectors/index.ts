@@ -28,11 +28,11 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 698, 9001]
+  supportedChainIds: [1, 3, 4, 5, 42, 698]
 })
 
 // export const okxInjected = new InjectedConnector({
-//   supportedChainIds: [698, 9001]
+//   supportedChainIds: [698]
 // })
 export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
 
@@ -43,7 +43,6 @@ export const walletconnect = new WalletConnectConnector({
   // qrcode: true,
   // pollingInterval: 15000
   rpc: {
-    // 9001: 'https://rpc.matchscan.io/'
     698: ' https://rpc.matchain.io/'
   },
   bridge: WALLETCONNECT_BRIDGE_URL,

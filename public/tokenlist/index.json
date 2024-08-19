@@ -1,56 +1,30 @@
 {
   "name": "MSwap",
-  "timestamp": "2023-04-05T16:31:15.034Z",
+  "timestamp": "2024-08-05T16:31:15.034Z",
   "version": {
     "major": 2,
-    "minor": 16,
-    "patch": 133
+    "minor": 3,
+    "patch": 4
   },
-  "logoURI": "https://pancakeswap.finance/logo.png",
-  "keywords": [
-    "pancakeswap",
-    "extended"
-  ],
+  "logoURI": "https://tokens.pancakeswap.finance/images/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56.png",
+  "keywords": ["MSwap", "extended"],
   "tokens": [
     {
-    "name": "Match Pegged GLD",
-    "symbol": "GLD",
-    "address": "0x05171e5C88b43ef35D223f64E1304D3D5210701D",
-    "chainId": 698,
-    "decimals": 18,
-    "logoURI": "https://tokens.pancakeswap.finance/images/0x55d398326f99059fF775485246999027B3197955.png"
-  },
-    {
-      "name": "Match Pegged TOX",
-      "symbol": "TOX",
-      "address": "0x3eE243ff68074502b1D9D65443fa97b99f634570",
-      "chainId": 698,
-      "decimals": 18,
-      "logoURI": "https://tokens.pancakeswap.finance/images/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d.png"
-    },
-    {
-      "name": "Match Pegged TOXA",
-      "symbol": "TOXA",
-      "address": "0x65FCEc1a5A5E803877C788b494d9adF2a955e95d",
+      "name": "WBNB",
+      "symbol": "WBNB",
+      "address": "0x4200000000000000000000000000000000000006",
       "chainId": 698,
       "decimals": 18,
       "logoURI": "https://tokens.pancakeswap.finance/images/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56.png"
     },
     {
-      "name": "Match Pegged TOXB",
-      "symbol": "TOXB",
-      "address": "0xc787ac4A98B974cdB3d4a2D5E1ca31802f9063EA",
+      "name": "USDT",
+      "symbol": "USDT",
+      "address": "0xefd4bC9afD210517803f293ABABd701CaeeCdfd0",
       "chainId": 698,
       "decimals": 18,
-      "logoURI": "https://tokens.pancakeswap.finance/images/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56.png"
-    },
-    {
-      "name": "Match Wrapped MAT",
-      "symbol": "WMAT",
-      "address": "0xF3d91876bF7bEBd64926D7A727A08202ECA4d280",
-      "chainId": 698,
-      "decimals": 18,
-      "logoURI": "https://matswap.io/images/MAT.svg"
+      "logoURI": "https://tokens.pancakeswap.finance/images/0x55d398326f99059fF775485246999027B3197955.png"
     }
   ]
 }
+
