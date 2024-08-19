@@ -5,8 +5,8 @@ import { Text } from 'rebass'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/images/LOGO.png'
-import LogoDark from '../../assets/images/LOGO_white.png'
+import Logo from '../../assets/images/LOGO.svg'
+import LogoDark from '../../assets/images/LOGO_white.svg'
 import IconLang from '../../assets/images/icon_lang.png'
 import IconLangDark from '../../assets/images/icon_lang_white.png'
 // import IconNet from '../../assets/images/icon_net.png'
