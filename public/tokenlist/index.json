@@ -12,16 +12,16 @@
     {
       "name": "WBNB",
       "symbol": "WBNB",
-      "address": "0x4200000000000000000000000000000000000006",
-      "chainId": 698,
+      "address": "0xC5D4d7b9A90c060f1C7D389bC3a20eeB382AA665",
+      "chainId": 5611,
       "decimals": 18,
       "logoURI": "https://tokens.pancakeswap.finance/images/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56.png"
     },
     {
       "name": "USDT",
       "symbol": "USDT",
-      "address": "0xefd4bC9afD210517803f293ABABd701CaeeCdfd0",
-      "chainId": 698,
+      "address": "0x83700f69B0173ebB46fDAd89A4b27eB7ef171118",
+      "chainId": 5611,
       "decimals": 18,
       "logoURI": "https://tokens.pancakeswap.finance/images/0x55d398326f99059fF775485246999027B3197955.png"
     }

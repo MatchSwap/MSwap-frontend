@@ -3,14 +3,20 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, okxInjected, portis, walletconnect, walletlink } from '../connectors'
 
-export const ROUTER_ADDRESS = '0x83700f69B0173ebB46fDAd89A4b27eB7ef171118'
+export const ROUTER_ADDRESS = '0x338bcc4efd3ca000d123d7352b362fc6d5b3d829'
 
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
-export const WBNB = new Token(ChainId.MATCH, '0x4200000000000000000000000000000000000006', 18, 'WBNB', 'Wrapped BNB')
-export const MUSDT = new Token(ChainId.MATCH, '0xefd4bC9afD210517803f293ABABd701CaeeCdfd0', 18, 'USDT', 'USDT')
+export const WBNB = new Token(
+  ChainId.MATCH_TEST,
+  '0xC5D4d7b9A90c060f1C7D389bC3a20eeB382AA665',
+  18,
+  'WBNB',
+  'Wrapped BNB'
+)
+export const MUSDT = new Token(ChainId.MATCH_TEST, '0x83700f69B0173ebB46fDAd89A4b27eB7ef171118', 18, 'USDT', 'USDT')
 // export const GLD = new Token(ChainId.MATCH, '0x05171e5C88b43ef35D223f64E1304D3D5210701D', 18, 'GLD', 'GLD')
 // export const TOX = new Token(ChainId.MATCH, '0x3eE243ff68074502b1D9D65443fa97b99f634570', 18, 'TOX', 'TOX')
 // export const TOXA = new Token(ChainId.MATCH, '0x65FCEc1a5A5E803877C788b494d9adF2a955e95d', 18, 'TOXA', 'TOXA')
@@ -29,14 +35,14 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
-  [ChainId.MATCH]: [WETH[ChainId.MATCH]]
+  [ChainId.MATCH_TEST]: [WETH[ChainId.MATCH_TEST]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR],
-  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH], WBNB, MUSDT]
+  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], WBNB, MUSDT]
 }
 
 /**
@@ -53,7 +59,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH]]
+  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST]]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -71,7 +77,7 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [USDC, USDT],
     [DAI, USDT]
   ],
-  [ChainId.MATCH]: [[WBNB, MUSDT]]
+  [ChainId.MATCH_TEST]: [[WBNB, MUSDT]]
 }
 
 export interface WalletInfo {
