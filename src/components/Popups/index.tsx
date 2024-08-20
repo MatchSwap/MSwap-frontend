@@ -65,7 +65,7 @@ export default function Popups() {
       }
       removePopup(activePopups[0].key)
     }
-  }, [activePopups])
+  }, [activePopups, dispatch, removePopup])
 
   return (
     <>
