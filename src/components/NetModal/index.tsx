@@ -106,12 +106,12 @@ export default function NetModal() {
   const netModalOpen = useNetModalOpen()
   const toggleNetModal = useNetModalToggle()
   const { chainId, library, activate } = useWeb3React()
-  const [curChainId, setCurChainId] = useState(5611)
+  const [curChainId, setCurChainId] = useState(699)
   const injectedConnector = new InjectedConnector({
-    supportedChainIds: [5611, 56]
+    supportedChainIds: [699, 56]
   })
   useEffect(() => {
-    setCurChainId(chainId ?? 5611)
+    setCurChainId(chainId ?? 699)
   }, [chainId])
 
   const onHandleChangeNet = async (item: any) => {

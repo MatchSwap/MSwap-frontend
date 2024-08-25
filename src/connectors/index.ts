@@ -28,11 +28,11 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 5611]
+  supportedChainIds: [1, 3, 4, 5, 42, 699]
 })
 
 export const okxInjected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 5611]
+  supportedChainIds: [1, 3, 4, 5, 42, 699]
 })
 // export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
 
@@ -43,7 +43,7 @@ export const walletconnect = new WalletConnectConnector({
   // qrcode: true,
   // pollingInterval: 15000
   rpc: {
-    5611: 'https://opbnb-testnet-rpc.bnbchain.org'
+    699: 'https://opbnb-testnet-rpc.bnbchain.org'
   },
   bridge: WALLETCONNECT_BRIDGE_URL,
   qrcode: true,

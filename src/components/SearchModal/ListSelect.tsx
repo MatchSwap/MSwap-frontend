@@ -1,62 +1,62 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react'
 import { ArrowLeft } from 'react-feather'
 import ReactGA from 'react-ga'
-import { usePopper } from 'react-popper'
+// import { usePopper } from 'react-popper'
 import { useDispatch, useSelector } from 'react-redux'
 import { Text } from 'rebass'
 import styled from 'styled-components'
-import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
+// import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
 import { useFetchListCallback } from '../../hooks/useFetchListCallback'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
 import useToggle from '../../hooks/useToggle'
 import { AppDispatch, AppState } from '../../state'
-import { acceptListUpdate, removeList, selectList } from '../../state/lists/actions'
+import { removeList, selectList } from '../../state/lists/actions' //acceptListUpdate,
 import { useSelectedListUrl } from '../../state/lists/hooks'
-import { CloseIcon, ExternalLink, LinkStyledButton, TYPE } from '../../theme'
-import listVersionLabel from '../../utils/listVersionLabel'
+import { CloseIcon, TYPE } from '../../theme' //ExternalLink, LinkStyledButton,
+// import listVersionLabel from '../../utils/listVersionLabel'
 import { parseENSAddress } from '../../utils/parseENSAddress'
 import uriToHttp from '../../utils/uriToHttp'
-import { ButtonOutlined, ButtonPrimary, ButtonSecondary } from '../Button'
+import { ButtonPrimary, ButtonSecondary } from '../Button' //ButtonOutlined,
 
 import Column from '../Column'
 import ListLogo from '../ListLogo'
 import QuestionHelper from '../QuestionHelper'
 import Row, { RowBetween } from '../Row'
-import { PaddedColumn, SearchInput, Separator, SeparatorDark } from './styleds'
+import { PaddedColumn, SearchInput, Separator } from './styleds' //, SeparatorDark
 
-const UnpaddedLinkStyledButton = styled(LinkStyledButton)`
-  padding: 0;
-  font-size: 1rem;
-  opacity: ${({ disabled }) => (disabled ? '0.4' : '1')};
-`
+// const UnpaddedLinkStyledButton = styled(LinkStyledButton)`
+//   padding: 0;
+//   font-size: 1rem;
+//   opacity: ${({ disabled }) => (disabled ? '0.4' : '1')};
+// `
 
-const PopoverContainer = styled.div<{ show: boolean }>`
-  z-index: 100;
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
-  opacity: ${props => (props.show ? 1 : 0)};
-  transition: visibility 150ms linear, opacity 150ms linear;
-  background: ${({ theme }) => theme.bg2};
-  border: 1px solid ${({ theme }) => theme.bg3};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
-    0px 24px 32px rgba(0, 0, 0, 0.01);
-  color: ${({ theme }) => theme.text2};
-  border-radius: 0.5rem;
-  padding: 1rem;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-gap: 8px;
-  font-size: 1rem;
-  text-align: left;
-`
+// const PopoverContainer = styled.div<{ show: boolean }>`
+//   z-index: 100;
+//   visibility: ${props => (props.show ? 'visible' : 'hidden')};
+//   opacity: ${props => (props.show ? 1 : 0)};
+//   transition: visibility 150ms linear, opacity 150ms linear;
+//   background: ${({ theme }) => theme.bg2};
+//   border: 1px solid ${({ theme }) => theme.bg3};
+//   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
+//     0px 24px 32px rgba(0, 0, 0, 0.01);
+//   color: ${({ theme }) => theme.text2};
+//   border-radius: 0.5rem;
+//   padding: 1rem;
+//   display: grid;
+//   grid-template-rows: 1fr;
+//   grid-gap: 8px;
+//   font-size: 1rem;
+//   text-align: left;
+// `
 
-const StyledMenu = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border: none;
-`
+// const StyledMenu = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: relative;
+//   border: none;
+// `
 
 const StyledListUrlText = styled.div`
   max-width: 160px;
@@ -93,20 +93,20 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
   const listsByUrl = useSelector<AppState, AppState['lists']['byUrl']>(state => state.lists.byUrl)
   const selectedListUrl = useSelectedListUrl()
   const dispatch = useDispatch<AppDispatch>()
-  const { current: list, pendingUpdate: pending } = listsByUrl[listUrl]
+  const { current: list } = listsByUrl[listUrl] //, pendingUpdate: pending
 
   const isSelected = listUrl === selectedListUrl
 
   const [open, toggle] = useToggle(false)
   const node = useRef<HTMLDivElement>()
-  const [referenceElement, setReferenceElement] = useState<HTMLDivElement>()
-  const [popperElement, setPopperElement] = useState<HTMLDivElement>()
+  // const [referenceElement, setReferenceElement] = useState<HTMLDivElement>()
+  // const [popperElement, setPopperElement] = useState<HTMLDivElement>()
 
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: 'auto',
-    strategy: 'fixed',
-    modifiers: [{ name: 'offset', options: { offset: [8, 8] } }]
-  })
+  // const { styles, attributes } = usePopper(referenceElement, popperElement, {
+  //   placement: 'auto',
+  //   strategy: 'fixed',
+  //   modifiers: [{ name: 'offset', options: { offset: [8, 8] } }]
+  // })
 
   useOnClickOutside(node, open ? toggle : undefined)
 
@@ -122,31 +122,31 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
     onBack()
   }, [dispatch, isSelected, listUrl, onBack])
 
-  const handleAcceptListUpdate = useCallback(() => {
-    if (!pending) return
-    ReactGA.event({
-      category: 'Lists',
-      action: 'Update List from List Select',
-      label: listUrl
-    })
-    dispatch(acceptListUpdate(listUrl))
-  }, [dispatch, listUrl, pending])
+  // const handleAcceptListUpdate = useCallback(() => {
+  //   if (!pending) return
+  //   ReactGA.event({
+  //     category: 'Lists',
+  //     action: 'Update List from List Select',
+  //     label: listUrl
+  //   })
+  //   dispatch(acceptListUpdate(listUrl))
+  // }, [dispatch, listUrl, pending])
 
-  const handleRemoveList = useCallback(() => {
-    ReactGA.event({
-      category: 'Lists',
-      action: 'Start Remove List',
-      label: listUrl
-    })
-    if (window.prompt(`Please confirm you would like to remove this list by typing REMOVE`) === `REMOVE`) {
-      ReactGA.event({
-        category: 'Lists',
-        action: 'Confirm Remove List',
-        label: listUrl
-      })
-      dispatch(removeList(listUrl))
-    }
-  }, [dispatch, listUrl])
+  // const handleRemoveList = useCallback(() => {
+  //   ReactGA.event({
+  //     category: 'Lists',
+  //     action: 'Start Remove List',
+  //     label: listUrl
+  //   })
+  //   if (window.prompt(`Please confirm you would like to remove this list by typing REMOVE`) === `REMOVE`) {
+  //     ReactGA.event({
+  //       category: 'Lists',
+  //       action: 'Confirm Remove List',
+  //       label: listUrl
+  //     })
+  //     dispatch(removeList(listUrl))
+  //   }
+  // }, [dispatch, listUrl])
 
   if (!list) return null
 
@@ -177,7 +177,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
           </StyledListUrlText>
         </Row>
       </Column>
-      <StyledMenu ref={node as any}>
+      {/* <StyledMenu ref={node as any}>
         <ButtonOutlined
           style={{
             width: '2rem',
@@ -205,7 +205,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
             )}
           </PopoverContainer>
         )}
-      </StyledMenu>
+      </StyledMenu> */}
       {isSelected ? (
         <ButtonPrimary
           disabled={true}
@@ -371,9 +371,9 @@ export function ListSelect({ onDismiss, onBack }: { onDismiss: () => void; onBac
       </ListContainer>
       <Separator />
 
-      <div style={{ padding: '16px', textAlign: 'center' }}>
+      {/* <div style={{ padding: '16px', textAlign: 'center' }}>
         <ExternalLink href="https://tokenlists.org">Browse lists</ExternalLink>
-      </div>
+      </div> */}
     </Column>
   )
 }
