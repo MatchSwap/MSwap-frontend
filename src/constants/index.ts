@@ -59,7 +59,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
-  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], MA, MB, MC]
+  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST]]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
