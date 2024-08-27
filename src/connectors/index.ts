@@ -34,8 +34,18 @@ export const injected = new InjectedConnector({
 export const okxInjected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42, 698]
 })
-// export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
-
+// export const okxInjected = new NetworkConnector({ urls: { 698: 'https://rpc.matchain.io/' } }) // OKX
+// export const okxInjected = new WalletConnectConnector({
+//   // rpc: { 1: NETWORK_URL },
+//   // bridge: 'https://bridge.walletconnect.org',
+//   // qrcode: true,
+//   // pollingInterval: 15000
+//   rpc: {
+//     698: 'https://rpc.matchain.io/'
+//   },
+//   bridge: WALLETCONNECT_BRIDGE_URL,
+//   pollingInterval: 15000
+// })
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
   // rpc: { 1: NETWORK_URL },
@@ -43,7 +53,7 @@ export const walletconnect = new WalletConnectConnector({
   // qrcode: true,
   // pollingInterval: 15000
   rpc: {
-    698: ' https://rpc.matchain.io/'
+    698: 'https://rpc.matchain.io/'
   },
   bridge: WALLETCONNECT_BRIDGE_URL,
   qrcode: true,

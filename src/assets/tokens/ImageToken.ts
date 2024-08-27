@@ -4,6 +4,7 @@ import TOX from './TOX.png'
 import TOXA from './TOXA.png'
 import TOXB from './TOXB.png'
 import GLD from './GLD.png'
+import weth from './weth.png'
 
 const ImageToken: any = {
   BNB: BNB,
@@ -11,6 +12,9 @@ const ImageToken: any = {
   TOX,
   TOXA,
   TOXB,
-  GLD
+  GLD,
+  USDT: TOX,
+  USDC: TOXB,
+  WETH: weth
 }
 export default ImageToken
