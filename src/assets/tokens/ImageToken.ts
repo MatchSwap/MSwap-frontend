@@ -4,6 +4,9 @@ import TOX from './TOX.png'
 import TOXA from './TOXA.png'
 import TOXB from './TOXB.png'
 import GLD from './GLD.png'
+import MA from './MA.png'
+import MB from './MB.png'
+import MC from './MC.png'
 
 const ImageToken: any = {
   BNB: BNB,
@@ -11,6 +14,9 @@ const ImageToken: any = {
   TOX,
   TOXA,
   TOXB,
-  GLD
+  GLD,
+  MA,
+  MB,
+  MC
 }
 export default ImageToken

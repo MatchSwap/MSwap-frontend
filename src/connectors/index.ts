@@ -34,6 +34,13 @@ export const injected = new InjectedConnector({
 export const okxInjected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42, 699]
 })
+
+export const INTOInjected = new InjectedConnector({
+  supportedChainIds: [1, 3, 4, 5, 42, 699]
+})
+export const digibuyInjected = new InjectedConnector({
+  supportedChainIds: [1, 3, 4, 5, 42, 699]
+})
 // export const okxInjected = new NetworkConnector({ urls: { 698: 'https://okx.com' } }) // OKX
 
 // mainnet only

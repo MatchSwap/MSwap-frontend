@@ -1,7 +1,16 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@uniswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
-import { fortmatic, injected, okxInjected, portis, walletconnect, walletlink } from '../connectors'
+import {
+  digibuyInjected,
+  fortmatic,
+  injected,
+  INTOInjected,
+  okxInjected,
+  portis,
+  walletconnect,
+  walletlink
+} from '../connectors'
 
 export const ROUTER_ADDRESS = '0xC5D4d7b9A90c060f1C7D389bC3a20eeB382AA665'
 
@@ -17,6 +26,7 @@ export const WBNB = new Token(
   'Wrapped BNB'
 )
 export const MUSDT = new Token(ChainId.MATCH_TEST, '0x338bCC4efd3cA000D123d7352b362Fc6D5B3D829', 18, 'USDT', 'USDT')
+export const MUSDC = new Token(ChainId.MATCH_TEST, '0x8C803B25e89438a09a67e9c267F8ce9d49Fdb3D8', 18, 'USDC', 'USDC')
 export const MA = new Token(ChainId.MATCH_TEST, '0x83700f69B0173ebB46fDAd89A4b27eB7ef171118', 18, 'MA', 'MA')
 export const MB = new Token(ChainId.MATCH_TEST, '0x5fA924F68e9131453205d2c9bCce7d3235c715e0', 18, 'MB', 'MB')
 export const MC = new Token(ChainId.MATCH_TEST, '0xcf5A75b7bA42572F0955F7d45d09e7F9bcD4942c', 18, 'MC', 'MC')
@@ -42,7 +52,7 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR],
-  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], WBNB, MUSDT, MA, MB, MC]
+  [ChainId.MATCH_TEST]: [...WETH_ONLY[ChainId.MATCH_TEST], WBNB, MUSDT, MUSDC, MA, MB, MC]
 }
 
 /**
@@ -79,6 +89,8 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
   ],
   [ChainId.MATCH_TEST]: [
     [WBNB, MUSDT],
+    [WBNB, MUSDC],
+    [MUSDT, MUSDC],
     [WBNB, MA],
     [WBNB, MB],
     [WBNB, MC]
@@ -121,7 +133,26 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     iconName: 'OKXWalletIcon.svg',
     description: 'OKX browser extension.',
     href: null,
-    color: '#E8831D'
+    color: '#E8831D',
+    mobile: true
+  },
+  INTO_WALLET: {
+    connector: INTOInjected,
+    name: 'INTO Wallet',
+    iconName: 'icon_wallet_into.png',
+    description: 'INTO browser extension.',
+    href: null, //'https://intoverse.co/'
+    color: '#E8831D',
+    mobile: true
+  },
+  DIGIBUY_WALLET: {
+    connector: digibuyInjected,
+    name: 'Bigibuy Wallet',
+    iconName: 'digibuylogo.svg',
+    description: 'Bigibuy browser extension.',
+    href: null,
+    color: '#E8831D',
+    mobile: true
   },
   WALLET_CONNECT: {
     connector: walletconnect,
