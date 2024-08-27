@@ -134,6 +134,8 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
+  console.log('currency0 -------- ', currency0)
+  console.log('currency1 -------- ', currency1)
 
   const [showMore, setShowMore] = useState(false)
 
