@@ -2,7 +2,7 @@
   "name": "MSwap",
   "timestamp": "2024-08-05T16:31:15.034Z",
   "version": {
-    "major": 2,
+    "major": 3,
     "minor": 3,
     "patch": 4
   },
@@ -26,9 +26,17 @@
       "logoURI": "https://tokens.pancakeswap.finance/images/0x55d398326f99059fF775485246999027B3197955.png"
     },
     {
-      "name": "USDC",
+      "name": "USDC.e",
       "symbol": "USDC",
       "address": "0x97eec1c29f745dC7c267F90292AA663d997a601D",
+      "chainId": 698,
+      "decimals": 18,
+      "logoURI": "https://tokens.pancakeswap.finance/images/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d.png"
+    },
+    {
+      "name": "WETH",
+      "symbol": "WETH",
+      "address": "0xFF13A7A12fd485BC9687fF88D8Ae1A6b655Ab469",
       "chainId": 698,
       "decimals": 18,
       "logoURI": "https://tokens.pancakeswap.finance/images/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d.png"

@@ -10,9 +10,9 @@ type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
 export const WBNB = new Token(ChainId.MATCH, '0x4200000000000000000000000000000000000006', 18, 'WBNB', 'Wrapped BNB')
-export const MUSDT = new Token(ChainId.MATCH, '0xefd4bC9afD210517803f293ABABd701CaeeCdfd0', 18, 'USDT', 'USDT')
-export const MUSDC = new Token(ChainId.MATCH, '0x97eec1c29f745dC7c267F90292AA663d997a601D', 18, 'USDC', 'USDC')
-
+export const MUSDT = new Token(ChainId.MATCH, '0xB6dc6C8b71e88642cEAD3be1025565A9eE74d1C6', 18, 'USDT', 'USDT')
+export const MUSDC = new Token(ChainId.MATCH, '0x97eec1c29f745dC7c267F90292AA663d997a601D', 18, 'USDC.e', 'USDC.e')
+export const MWETH = new Token(ChainId.MATCH, '0xFF13A7A12fd485BC9687fF88D8Ae1A6b655Ab469', 18, 'WETH', 'WETH')
 // export const GLD = new Token(ChainId.MATCH, '0x05171e5C88b43ef35D223f64E1304D3D5210701D', 18, 'GLD', 'GLD')
 // export const TOX = new Token(ChainId.MATCH, '0x3eE243ff68074502b1D9D65443fa97b99f634570', 18, 'TOX', 'TOX')
 // export const TOXA = new Token(ChainId.MATCH, '0x65FCEc1a5A5E803877C788b494d9adF2a955e95d', 18, 'TOXA', 'TOXA')
@@ -38,7 +38,7 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR],
-  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH], WBNB, MUSDT, MUSDC]
+  [ChainId.MATCH]: [...WETH_ONLY[ChainId.MATCH], WBNB, MUSDT, MUSDC, MWETH]
 }
 
 /**
@@ -75,6 +75,8 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
   ],
   [ChainId.MATCH]: [
     [WBNB, MUSDT],
+    [WBNB, MUSDC],
+    [WBNB, MWETH],
     [MUSDT, MUSDC]
   ]
 }
