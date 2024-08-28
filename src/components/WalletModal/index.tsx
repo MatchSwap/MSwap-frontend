@@ -11,7 +11,7 @@ import AccountDetails from '../AccountDetails'
 import PendingView from './PendingView'
 import Option from './Option'
 import { SUPPORTED_WALLETS } from '../../constants'
-import { ExternalLink } from '../../theme'
+// import { ExternalLink } from '../../theme'
 import MetamaskIcon from '../../assets/images/metamask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { injected, fortmatic, portis, okxInjected } from '../../connectors'
@@ -81,17 +81,17 @@ const UpperSection = styled.div`
   }
 `
 
-const Blurb = styled.div`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    margin: 1rem;
-    font-size: 12px;
-  `};
-`
+// const Blurb = styled.div`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   align-items: center;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   margin-top: 2rem;
+//   ${({ theme }) => theme.mediaWidth.upToMedium`
+//     margin: 1rem;
+//     font-size: 12px;
+//   `};
+// `
 
 const OptionGrid = styled.div`
   display: grid;
@@ -178,14 +178,16 @@ export default function WalletModal({
     })
     setPendingWallet(connector) // set wallet for pending view
     setWalletView(WALLET_VIEWS.PENDING)
-
+    console.log('11111222')
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
     if (connector instanceof WalletConnectConnector && connector.walletConnectProvider?.wc?.uri) {
+      console.log('11111')
       connector.walletConnectProvider = undefined
     }
 
     connector &&
       activate(connector, undefined, true).catch(error => {
+        console.log('error ---- ', error)
         if (error instanceof UnsupportedChainIdError) {
           activate(connector) // a little janky...can't use setError because the connector isn't set
         } else {
@@ -348,12 +350,12 @@ export default function WalletModal({
           ) : (
             <OptionGrid>{getOptions()}</OptionGrid>
           )}
-          {walletView !== WALLET_VIEWS.PENDING && (
+          {/* {walletView !== WALLET_VIEWS.PENDING && (
             <Blurb>
               <span>New to Ethereum? &nbsp;</span>{' '}
               <ExternalLink href="https://ethereum.org/wallets/">Learn more about wallets</ExternalLink>
             </Blurb>
-          )}
+          )} */}
         </ContentWrapper>
       </UpperSection>
     )

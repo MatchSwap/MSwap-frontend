@@ -2,7 +2,7 @@
   "name": "MSwap",
   "timestamp": "2024-08-05T16:31:15.034Z",
   "version": {
-    "major": 3,
+    "major": 6,
     "minor": 3,
     "patch": 4
   },
@@ -22,7 +22,7 @@
       "symbol": "USDT",
       "address": "0xB6dc6C8b71e88642cEAD3be1025565A9eE74d1C6",
       "chainId": 698,
-      "decimals": 18,
+      "decimals": 6,
       "logoURI": "https://tokens.pancakeswap.finance/images/0x55d398326f99059fF775485246999027B3197955.png"
     },
     {
@@ -30,7 +30,7 @@
       "symbol": "USDC",
       "address": "0x97eec1c29f745dC7c267F90292AA663d997a601D",
       "chainId": 698,
-      "decimals": 18,
+      "decimals": 6,
       "logoURI": "https://tokens.pancakeswap.finance/images/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d.png"
     },
     {

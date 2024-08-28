@@ -15,6 +15,7 @@ import { getEtherscanLink } from '../../utils'
 import { injected, walletconnect, walletlink, fortmatic, portis, okxInjected } from '../../connectors'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
+import OKXWalletConnectIcon from '../../assets/images/OKXWalletIcon.svg'
 import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import Identicon from '../Identicon'
@@ -246,6 +247,12 @@ export default function AccountDetails({
       return (
         <IconWrapper size={16}>
           <Identicon />
+        </IconWrapper>
+      )
+    } else if (connector === okxInjected) {
+      return (
+        <IconWrapper size={16}>
+          <img src={OKXWalletConnectIcon} alt={'wallet connect logo'} />
         </IconWrapper>
       )
     } else if (connector === walletconnect) {
