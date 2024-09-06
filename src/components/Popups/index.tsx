@@ -1,3 +1,11 @@
+/*
+ * @Author: Evan 360313191@qq.com
+ * @Date: 2024-09-06 15:17:10
+ * @LastEditors: Evan 360313191@qq.com
+ * @LastEditTime: 2024-09-06 15:36:49
+ * @FilePath: \MSwap_dev\src\components\Popups\index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React, { useEffect } from 'react'
 // import styled from 'styled-components'
 import { useActivePopups, useRemovePopup } from '../../state/application/hooks'
@@ -65,7 +73,7 @@ export default function Popups() {
       }
       removePopup(activePopups[0].key)
     }
-  }, [activePopups])
+  }, [activePopups, dispatch, removePopup])
 
   return (
     <>
