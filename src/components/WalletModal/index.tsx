@@ -18,6 +18,8 @@ import { injected, fortmatic, portis, okxInjected } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { AbstractConnector } from '@web3-react/abstract-connector'
+import { ColumnCenter } from '../Column'
+import { NET_CHAIN_LIST } from '../../constants/netChain'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -50,6 +52,13 @@ const HeaderRow = styled.div`
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem;
   `};
+`
+const ConnectView = styled.div`
+  margin: 1rem;
+  padding: 0.5rem 3rem;
+  border-radius: 10px;
+  color: white;
+  background-color: ${({ theme }) => theme.primary6};
 `
 
 const ContentWrapper = styled.div`
@@ -178,16 +187,14 @@ export default function WalletModal({
     })
     setPendingWallet(connector) // set wallet for pending view
     setWalletView(WALLET_VIEWS.PENDING)
-    console.log('11111222')
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
     if (connector instanceof WalletConnectConnector && connector.walletConnectProvider?.wc?.uri) {
-      console.log('11111')
       connector.walletConnectProvider = undefined
     }
 
     connector &&
       activate(connector, undefined, true).catch(error => {
-        console.log('error ---- ', error)
+        // console.log('error ---- ', error)
         if (error instanceof UnsupportedChainIdError) {
           activate(connector) // a little janky...can't use setError because the connector isn't set
         } else {
@@ -203,6 +210,23 @@ export default function WalletModal({
     })
   }, [toggleWalletModal])
 
+  const connectMatch = async () => {
+    // console.log('params--====--', NET_CHAIN_LIST[0].params)
+    try {
+      const result = await window.ethereum?.request({
+        method: isMobile ? 'wallet_switchEthereumChain' : 'wallet_addEthereumChain', //wallet_switchEthereumChain //wallet_addEthereumChain
+        params: [NET_CHAIN_LIST[0].params, account]
+      })
+      if (!result) {
+        toggleWalletModal()
+      }
+      window.location.reload()
+      // console.log('result ----- ', result)
+    } catch (error) {
+      console.log('error ----- ', error)
+    }
+  }
+
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     const isMetamask = window.ethereum && window.ethereum.isMetaMask
@@ -216,6 +240,22 @@ export default function WalletModal({
         }
 
         if (!window.web3 && !window.ethereum && option.mobile) {
+          return (
+            <Option
+              onClick={() => {
+                option.connector !== connector && !option.href && tryActivation(option.connector)
+              }}
+              id={`connect-${key}`}
+              key={key}
+              active={option.connector && option.connector === connector}
+              color={option.color}
+              link={option.href}
+              header={option.name}
+              subheader={null}
+              icon={require('../../assets/images/' + option.iconName)}
+            />
+          )
+        } else if (option.mobile || option.mobileOnly) {
           return (
             <Option
               onClick={() => {
@@ -297,13 +337,16 @@ export default function WalletModal({
             <CloseColor />
           </CloseIcon>
           <HeaderRow>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error connecting'}</HeaderRow>
-          <ContentWrapper>
-            {error instanceof UnsupportedChainIdError ? (
-              <h5>Please connect to Matchain network.</h5>
-            ) : (
-              'Error connecting. Try refreshing the page.'
-            )}
-          </ContentWrapper>
+          <ColumnCenter>
+            <ContentWrapper>
+              {error instanceof UnsupportedChainIdError ? (
+                <h5>Please connect to Matchain network.</h5>
+              ) : (
+                'Error connecting. Try refreshing the page.'
+              )}
+            </ContentWrapper>
+            <ConnectView onClick={connectMatch}>connect match</ConnectView>
+          </ColumnCenter>
         </UpperSection>
       )
     }

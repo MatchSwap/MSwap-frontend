@@ -197,6 +197,7 @@ function Web3StatusInner() {
       </Web3StatusConnected>
     )
   } else if (error) {
+    // deactivate()
     return (
       <Web3StatusError onClick={toggleWalletModal}>
         <NetworkIcon />

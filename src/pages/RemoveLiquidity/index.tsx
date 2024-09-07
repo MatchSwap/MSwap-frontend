@@ -119,7 +119,6 @@ export default function RemoveLiquidity({
     const nonce = await pairContract.nonces(account)
 
     const deadlineForSignature: number = Math.ceil(Date.now() / 1000) + deadline
-    console.log('pair.liquidityToken.address ----- ', pair.liquidityToken.address)
     const EIP712Domain = [
       { name: 'name', type: 'string' },
       { name: 'version', type: 'string' },
@@ -155,13 +154,10 @@ export default function RemoveLiquidity({
       primaryType: 'Permit',
       message
     })
-    console.log('data ------ ', data)
-    console.log('account ------ ', account)
     library
       .send('eth_signTypedData_v4', [account, data])
       .then(splitSignature)
       .then(signature => {
-        console.log('signature ------ ', signature)
         setSignatureData({
           v: signature.v,
           r: signature.r,

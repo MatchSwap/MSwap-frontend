@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useNetModalOpen, useNetModalToggle } from '../../state/application/hooks'
-
+import { isMobile } from 'react-device-detect'
 import Modal from '../Modal'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import completeIcon from '../../assets/images/complete.svg'
 import { NET_CHAIN_LIST } from '../../constants/netChain'
 import { useWeb3React } from '@web3-react/core'
-import { InjectedConnector } from '@web3-react/injected-connector'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -34,7 +33,7 @@ const Wrapper = styled.div`
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
-  padding: 1rem 1rem;
+  padding: 1rem;
   font-weight: 500;
   color: ${props => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
   ${({ theme }) => theme.mediaWidth.upToMedium`
@@ -44,7 +43,7 @@ const HeaderRow = styled.div`
 
 const ContentWrapper = styled.div`
   background-color: ${({ theme }) => theme.bg2};
-  padding: 2rem;
+  padding: 0 2rem 2rem;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 
@@ -105,28 +104,35 @@ const HoverText = styled.div`
 export default function NetModal() {
   const netModalOpen = useNetModalOpen()
   const toggleNetModal = useNetModalToggle()
-  const { chainId, library, activate } = useWeb3React()
+  const { chainId, account } = useWeb3React()
   const [curChainId, setCurChainId] = useState(698)
-  const injectedConnector = new InjectedConnector({
-    supportedChainIds: [698, 56]
-  })
   useEffect(() => {
     setCurChainId(chainId ?? 698)
   }, [chainId])
-
   const onHandleChangeNet = async (item: any) => {
+    // console.log('params--====--', item.params)
     try {
-      if (library && chainId !== library.provider.chainId) {
-        console.log('library ----- >1111', library)
-        await activate(injectedConnector)
-        setCurChainId(item.chainId)
-      } else {
-        console.log('library ----- >', library)
-        console.log('chainId ----- >', chainId)
-        console.log('library.provider.chainId ----- >', library.provider.chainId)
+      // const result = await window.ethereum?.request({
+      //   method: 'wallet_addEthereumChain', //wallet_switchEthereumChain //wallet_addEthereumChain
+      //   params: [item.params, account]
+      // })
+      // if (!result) {
+      //   toggleNetModal()
+      // }
+      // window.location.reload()
+      // console.log('result ----- ', result)
+
+      const result = await window.ethereum?.request({
+        method: isMobile ? 'wallet_switchEthereumChain' : 'wallet_addEthereumChain', //wallet_switchEthereumChain //wallet_addEthereumChain
+        params: [item.params, account]
+      })
+      if (!result) {
+        toggleNetModal()
       }
+      window.location.reload()
+      // console.log('result ----- ', result)
     } catch (error) {
-      console.error('Error switching chain:', error)
+      console.log('error ----- ', error)
     }
   }
 
@@ -149,7 +155,7 @@ export default function NetModal() {
                   <IconWrapper size={30}>
                     <img src={item.img} alt={''} />
                   </IconWrapper>
-                  <span>{item.name}</span>
+                  <span style={{ marginLeft: '15px' }}>{item.title}</span>
                 </NetName>
                 {item.chainId === curChainId && (
                   <IconWrapper>

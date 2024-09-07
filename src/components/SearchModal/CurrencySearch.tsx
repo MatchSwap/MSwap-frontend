@@ -7,14 +7,12 @@ import { Text } from 'rebass'
 // import { ThemeContext } from 'styled-components'
 import { useActiveWeb3React } from '../../hooks'
 import { useAllTokens, useToken } from '../../hooks/Tokens'
-// import { useSelectedListInfo } from '../../state/lists/hooks'
-import { CloseIcon } from '../../theme' //LinkStyledButton, TYPE
+import { useSelectedListInfo } from '../../state/lists/hooks'
+import { CloseIcon, LinkStyledButton, TYPE } from '../../theme' //LinkStyledButton, TYPE
 import { isAddress } from '../../utils'
-// import Card from '../Card'
 import Column from '../Column'
-// import ListLogo from '../ListLogo'
 import QuestionHelper from '../QuestionHelper'
-import { RowBetween } from '../Row' //Row,
+import Row, { RowBetween } from '../Row'
 import CommonBases from './CommonBases'
 import CurrencyList from './CurrencyList'
 import { filterTokens } from './filtering'
@@ -22,6 +20,8 @@ import SortButton from './SortButton'
 import { useTokenComparator } from './sorting'
 import { PaddedColumn, SearchInput, Separator } from './styleds'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import Card from '../Card'
+import ListLogo from '../ListLogo'
 
 interface CurrencySearchProps {
   isOpen: boolean
@@ -135,7 +135,7 @@ export function CurrencySearch({
     [filteredSortedTokens, handleCurrencySelect, searchQuery]
   )
 
-  // const selectedListInfo = useSelectedListInfo()
+  const selectedListInfo = useSelectedListInfo()
 
   return (
     <Column style={{ width: '100%', flex: '1 1' }}>
@@ -185,7 +185,7 @@ export function CurrencySearch({
         </AutoSizer>
       </div>
 
-      {/* <Separator />
+      <Separator />
       <Card>
         <RowBetween>
           {selectedListInfo.current ? (
@@ -201,14 +201,14 @@ export function CurrencySearch({
             </Row>
           ) : null}
           <LinkStyledButton
-            style={{ fontWeight: 500, color: theme.text2, fontSize: 16 }}
+            style={{ fontWeight: 500, fontSize: 16 }}
             onClick={onChangeList}
             id="currency-search-change-list-button"
           >
             {selectedListInfo.current ? 'Change' : 'Select a list'}
           </LinkStyledButton>
         </RowBetween>
-      </Card> */}
+      </Card>
     </Column>
   )
 }

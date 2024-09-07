@@ -107,7 +107,7 @@ export default function LanguageModal() {
   }, [curLang])
 
   const onHandleLang = (item: any) => {
-    console.log('item ---- >', item)
+    // console.log('item ---- >', item)
     i18next.changeLanguage(item.lang)
     setSelectLang(item.lang)
   }

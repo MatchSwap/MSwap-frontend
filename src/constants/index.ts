@@ -109,7 +109,8 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     iconName: 'metamask.png',
     description: 'Easy-to-use browser extension.',
     href: null,
-    color: '#E8831D'
+    color: '#E8831D',
+    mobile: true
   },
   OKX_WALLET: {
     connector: okxInjected,
@@ -117,7 +118,8 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     iconName: 'OKXWalletIcon.svg',
     description: 'OKX browser extension.',
     href: null,
-    color: '#E8831D'
+    color: '#E8831D',
+    mobile: true
   },
   WALLET_CONNECT: {
     connector: walletconnect,

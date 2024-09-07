@@ -9,8 +9,8 @@ import Logo from '../../assets/images/LOGO.svg'
 import LogoDark from '../../assets/images/LOGO_white.svg'
 import IconLang from '../../assets/images/icon_lang.png'
 import IconLangDark from '../../assets/images/icon_lang_white.png'
-// import IconNet from '../../assets/images/icon_net.png'
-// import IconNetDark from '../../assets/images/icon_net_white.png'
+import IconNet from '../../assets/images/icon_net.png'
+import IconNetDark from '../../assets/images/icon_net_white.png'
 // import Wordmark from '../../assets/svg/wordmark.svg'
 // import WordmarkDark from '../../assets/svg/wordmark_white.svg'
 import { useActiveWeb3React } from '../../hooks'
@@ -21,15 +21,17 @@ import { YellowCard } from '../Card'
 // import Settings from '../Settings'
 // import Menu from '../Menu'
 
-import { RowBetween } from '../Row' //Row,
+import Row, { RowBetween } from '../Row' //Row,
 import Web3Status from '../Web3Status'
-import { useLanguageModalToggle } from '../../state/application/hooks'
+import { useLanguageModalToggle, useNetModalToggle } from '../../state/application/hooks'
 import LanguageModal from '../LanguageModal'
 import NetModal from '../NetModal'
+import { HeaderTabs } from '../NavigationTabs/HeaderIndex'
 // import VersionSwitch from './VersionSwitch'
 
 const HeaderFrame = styled.div`
   display: flex;
+  background-color: white;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
@@ -67,7 +69,11 @@ const Title = styled.a`
     cursor: pointer;
   }
 `
-
+const HeaderTab = styled(Row)`
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    display: none;
+  `};
+`
 // const TitleText = styled(Row)`
 //   width: fit-content;
 //   white-space: nowrap;
@@ -94,6 +100,9 @@ const TestnetWrapper = styled.div`
   width: fit-content;
   margin-left: 10px;
   pointer-events: auto;
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    display: none;
+  `};
 `
 
 const NetworkCard = styled(YellowCard)`
@@ -156,23 +165,28 @@ const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const toggleLanguageModal = useLanguageModalToggle()
-  // const toggleNetModal = useNetModalToggle()
+  const toggleNetModal = useNetModalToggle()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [isDark] = useDarkModeManager()
 
   return (
     <HeaderFrame>
       <RowBetween style={{ alignItems: 'center' }} padding="1rem 1rem 0 1rem">
-        <HeaderElement>
-          <Title href=".">
-            <UniIcon>
-              <img src={isDark ? LogoDark : Logo} alt="logo" />
-            </UniIcon>
-            {/* <TitleText>
+        <Row>
+          <HeaderElement>
+            <Title href=".">
+              <UniIcon>
+                <img src={isDark ? LogoDark : Logo} alt="logo" />
+              </UniIcon>
+              {/* <TitleText>
               <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
             </TitleText> */}
-          </Title>
-        </HeaderElement>
+            </Title>
+          </HeaderElement>
+          <HeaderTab>
+            <HeaderTabs />
+          </HeaderTab>
+        </Row>
         <HeaderControls>
           <HeaderElement>
             <TestnetWrapper>
@@ -187,9 +201,11 @@ export default function Header() {
               <SmallIcon onClick={toggleLanguageModal}>
                 <img src={isDark ? IconLangDark : IconLang} alt="logo" />
               </SmallIcon>
-              {/* <SmallIcon onClick={toggleNetModal}>
-                <img src={isDark ? IconNetDark : IconNet} alt="logo" />
-              </SmallIcon> */}
+              {account && (
+                <SmallIcon onClick={toggleNetModal}>
+                  <img src={isDark ? IconNetDark : IconNet} alt="logo" />
+                </SmallIcon>
+              )}
               <LanguageModal />
               <NetModal />
               <Web3Status />

@@ -139,7 +139,7 @@ export const TYPE = {
     return <TextWrapper fontWeight={500} color={'text2'} {...props} />
   },
   link(props: TextProps) {
-    return <TextWrapper fontWeight={500} color={'primary1'} {...props} />
+    return <TextWrapper fontWeight={500} color={'primary6'} {...props} />
   },
   black(props: TextProps) {
     return <TextWrapper fontWeight={500} color={'text1'} {...props} />
@@ -157,7 +157,7 @@ export const TYPE = {
     return <TextWrapper fontWeight={400} fontSize={14} {...props} />
   },
   blue(props: TextProps) {
-    return <TextWrapper fontWeight={500} color={'primary1'} {...props} />
+    return <TextWrapper fontWeight={500} color={'primary6'} {...props} />
   },
   yellow(props: TextProps) {
     return <TextWrapper fontWeight={500} color={'yellow1'} {...props} />
@@ -218,8 +218,10 @@ html {
 }
 
 body {
-  min-height: 100vh;
   background-repeat: no-repeat;
-  background-image: url("./images/bg.png")
+  background-image: url("./images/bg.png");
+  background-size: 'cover';
+  background-position: 'center';
+  height: 100vh;
 }
 `

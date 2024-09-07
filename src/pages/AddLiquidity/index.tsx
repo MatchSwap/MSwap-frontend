@@ -155,7 +155,6 @@ export default function AddLiquidity({
       args: Array<string | string[] | number>,
       value: BigNumber | null
     if (currencyA === ETHER || currencyB === ETHER) {
-      console.log('111 ------- 3333')
       const tokenBIsETH = currencyB === ETHER
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
@@ -169,7 +168,6 @@ export default function AddLiquidity({
       ]
       value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
     } else {
-      console.log('111 ------- 4444')
       estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity
       args = [
@@ -183,21 +181,17 @@ export default function AddLiquidity({
         deadlineFromNow
       ]
       value = null
-      console.log('args ------- ', args)
       // console.log('value ------- ', value)
     }
 
     setAttemptingTxn(true)
-    console.log('111 ------- 222')
     await estimate(...args, value ? { value } : {})
       .then((estimatedGasLimit: any) => {
-        console.log('estimatedGasLimit ------- ', estimatedGasLimit)
         return method(...args, {
           ...(value ? { value } : {}),
           gasLimit: calculateGasMargin(estimatedGasLimit)
         }).then(response => {
           setAttemptingTxn(false)
-          console.log('response ------- ', response)
           addTransaction(response, {
             summary:
               'Add ' +

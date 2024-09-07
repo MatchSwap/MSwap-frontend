@@ -32,7 +32,7 @@ export const injected = new InjectedConnector({
 })
 
 export const okxInjected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42,698]
+  supportedChainIds: [1, 3, 4, 5, 42, 698]
 })
 // export const okxInjected = new NetworkConnector({ urls: { 698: 'https://rpc.matchain.io/' } }) // OKX
 // export const okxInjected = new WalletConnectConnector({

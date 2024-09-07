@@ -49,7 +49,7 @@ import { acceptListUpdate } from '../../state/lists/actions'
 export default function Popups() {
   // get all popups
   const activePopups = useActivePopups()
-  console.log('activePopups -----========== ', activePopups)
+  // console.log('activePopups -----========== ', activePopups)
   const removePopup = useRemovePopup()
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {

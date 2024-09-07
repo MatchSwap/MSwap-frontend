@@ -16,6 +16,7 @@ import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
+import PageError from './pages/PageError'
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
@@ -55,17 +56,19 @@ function Updaters() {
 ReactDOM.render(
   <StrictMode>
     <FixedGlobalStyle />
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <Web3ProviderNetwork getLibrary={getLibrary}>
-        <Provider store={store}>
-          <Updaters />
-          <ThemeProvider>
-            <ThemedGlobalStyle />
-            <App />
-          </ThemeProvider>
-        </Provider>
-      </Web3ProviderNetwork>
-    </Web3ReactProvider>
+    <PageError>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <Web3ProviderNetwork getLibrary={getLibrary}>
+          <Provider store={store}>
+            <Updaters />
+            <ThemeProvider>
+              <ThemedGlobalStyle />
+              <App />
+            </ThemeProvider>
+          </Provider>
+        </Web3ProviderNetwork>
+      </Web3ReactProvider>
+    </PageError>
   </StrictMode>,
   document.getElementById('root')
 )
