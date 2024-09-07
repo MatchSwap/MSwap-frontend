@@ -90,7 +90,6 @@ const columns: TableProps<TransactionDataType>['columns'] = [
   {
     title: 'Type',
     render: (data: any, item: any) => {
-      console.log(item, data)
       return (
         <Space>
           <SwapText>Swap</SwapText>

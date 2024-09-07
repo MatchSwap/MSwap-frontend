@@ -66,7 +66,6 @@ export default function HistogramChart() {
 
   const getData = async (type: any) => {
     const data: any = await getVolume({ duration: type })
-    console.log('getVolume data ------ ', data.v2_daily_tvl)
     setVolData(data.v2_daily_tvl)
   }
 
@@ -164,7 +163,6 @@ export default function HistogramChart() {
   const { t } = useTranslation()
 
   const onTab = (item: any) => {
-    console.log('item --- ', item)
     setCurType(item)
     let type = 'MONTH'
     if (item === 'Week') {

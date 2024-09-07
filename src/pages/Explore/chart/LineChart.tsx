@@ -37,7 +37,6 @@ export default function LineChart() {
 
   const getData = async (type: any) => {
     const res: any = await getTVL()
-    console.log(res.v2_daily_tvl, 'res---')
     setVolData(res.v2_daily_tvl)
   }
 
@@ -59,7 +58,6 @@ export default function LineChart() {
   useEffect(() => {
     const timestamps = volData && volData.map((item: any) => dayjs.unix(item.timestamp).format('MM-DD'))
     const values = volData && volData.map((item: any) => item.value)
-    console.log(values, 'values')
     if (!values) return
     const chartDom = document.getElementById('lineChart')
     const myChart = echarts.init(chartDom)

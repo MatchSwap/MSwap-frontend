@@ -42,7 +42,6 @@ export default function Explore({ history }: RouteComponentProps<{ currencyIdA: 
   const [transactionTableData, setTransactionTableData] = useState<any>([])
 
   const handleMenuClick: MenuProps['onClick'] = (e: any) => {
-    console.log('click', e)
     setTokenTableData([])
     setPoolTableData([])
     setTransactionTableData([])
@@ -97,7 +96,6 @@ export default function Explore({ history }: RouteComponentProps<{ currencyIdA: 
     const tokenData: any = await getTokenConf()
     if (curType === 'Tokens') {
       const tokensListData: any = await getTopTokens({ duration: curVolume, first: frist ?? 100 })
-      console.log('tokensListData ------ ', tokensListData)
       const data = tokensListData.map((item: any, index: number) => {
         return {
           ...item,
@@ -109,7 +107,6 @@ export default function Explore({ history }: RouteComponentProps<{ currencyIdA: 
       setTokenTableData(list)
     } else if (curType === 'Pools') {
       const poolListData: any = await getTopPairs({ first: frist ?? 100 })
-      console.log('poolListData ------ ', poolListData)
       const data = poolListData.map((item: any, index: any) => {
         return {
           ...item,
@@ -167,14 +164,12 @@ export default function Explore({ history }: RouteComponentProps<{ currencyIdA: 
   }, [tokenTableData])
 
   const onTab = (item: any) => {
-    console.log('item ----- ', item)
     setCurType(item)
   }
 
   const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return
     // Load more data when scrolled to the bottom
-    console.log(curType, 'curType')
     if (curType === 'Tokens') {
       tokenTableData.length % 100 === 0 && getData(tokenTableData.length + 100)
     }
